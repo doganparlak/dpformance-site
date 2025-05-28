@@ -52,7 +52,7 @@ body {
 }
 
 .animate-scroll-left {
-  animation: scroll-left 10s linear infinite;
+  animation: scroll-left 8s linear infinite;
 }
 
 .animate-scroll-left:hover {
