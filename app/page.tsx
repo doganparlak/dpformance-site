@@ -25,7 +25,7 @@ export default function Home() {
 
       {/* Description */}
       <p className="text-lg sm:text-xl text-gray-400 max-w-xl mb-8">
-        DPformance is a data-driven consultancy helping teams, analysts, and agencies make smarter football decisions through advanced analytics and insights.
+        DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game.
       </p>
 
       {/* Contact Icons */}
