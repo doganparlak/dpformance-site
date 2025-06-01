@@ -30,7 +30,7 @@ export default function Home() {
 
       {/* Contact Icons */}
       <div className="flex gap-6 mb-8">
-        <a href="mailto:dgnprlk@gmail.com" aria-label="Email" className="hover:text-red-500 transition-colors">
+        <a href="mailto:dogan.parlak@dpformance.com" aria-label="Email" className="hover:text-red-500 transition-colors">
           <Mail className="w-6 h-6 text-white" />
         </a>
         <a
