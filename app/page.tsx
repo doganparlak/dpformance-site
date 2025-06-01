@@ -71,6 +71,7 @@ export default function Home() {
 function PartnerLogos() {
   return (
     <div className="flex items-center justify-center h-48 px-4">
+      {/* 
       <Image
         src="/partners/UEFA_logo.png"
         alt="UEFA Logo"
@@ -78,6 +79,10 @@ function PartnerLogos() {
         height={120}
         className="inline-block object-contain transition-all duration-300 drop-shadow-lg"
       />
+      */}
+      <span className="text-xl sm:text-3xl text-gray-400 italic">
+        Coming Soon...
+      </span>
     </div>
   );
 }
