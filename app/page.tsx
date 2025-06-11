@@ -50,7 +50,7 @@ export default function Home() {
       {/* Our Partners Section */}
       <section className="mt-12 w-full max-w-6xl">
         <h2 className="text-center text-2xl sm:text-3xl font-semibold mb-6">
-          Our Partners
+          Our Clients
         </h2>
 
         <div className="relative overflow-hidden">
