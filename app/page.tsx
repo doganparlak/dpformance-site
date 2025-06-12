@@ -33,6 +33,7 @@ export default function Home() {
         <a href="mailto:dogan.parlak@dpformance.com" aria-label="Email" className="hover:text-red-500 transition-colors">
           <Mail className="w-6 h-6 text-white" />
         </a>
+        {/* 
         <a
           href="https://www.linkedin.com/in/dogan-parlak-0269521b1/"
           target="_blank"
@@ -42,6 +43,7 @@ export default function Home() {
         >
           <Linkedin className="w-6 h-6 text-white" />
         </a>
+        */}
         <a href="tel:+905313414661" aria-label="Phone" className="hover:text-red-500 transition-colors">
           <Phone className="w-6 h-6 text-white" />
         </a>
