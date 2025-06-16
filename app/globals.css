@@ -1,17 +1,13 @@
 @import "tailwindcss";
 
+/* === Root Color Variables === */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-primary-red: #ef4444; /* Tailwind red-500 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* === Dark Mode Colors (using prefers-color-scheme) === */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,29 +15,31 @@
   }
 }
 
+/* === Global Styles === */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* === Animations === */
+
 /* Fade-in-down animation */
 @keyframes fade-in-down {
-  0% {
+  from {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(-20px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 .animate-fade-in-down {
-  animation: fade-in-down 0.6s ease-out both;
+  animation: fade-in-down 1s ease forwards;
 }
 
-/* === Scrolling animation for Our Partners section === */
+/* Scrolling animation for partners section */
 @keyframes scroll-left {
   0% {
     transform: translateX(-25%);
@@ -50,11 +48,36 @@ body {
     transform: translateX(100%);
   }
 }
-
 .animate-scroll-left {
   animation: scroll-left 8s linear infinite;
 }
-
 .animate-scroll-left:hover {
   animation-play-state: paused;
+}
+
+/* Custom pulse on hover animation */
+@keyframes pulse-on-hover {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.75;
+  }
+}
+.animate-pulse-on-hover:hover {
+  animation: pulse-on-hover 1s infinite;
+}
+
+/* === Custom Colors Utility Classes === */
+.text-primary-red {
+  color: var(--color-primary-red);
+}
+.bg-primary-red {
+  background-color: var(--color-primary-red);
+}
+
+html {
+  scroll-padding-top: 80px; /* Adjust based on header height */
 }
