@@ -192,9 +192,34 @@ export default function Home() {
         <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
           We deliver tailored data solutions and football analytics to enhance performance, scouting, and tactical understanding for clubs, analysts, and organizations. 
           Our work draws on a wide range of data types — including <span className="text-white font-medium">tracking data, event data, and competition data</span> — 
-          and is shaped by the specific structures, technologies, and objectives of each client.
+          and is shaped by the specific structures, technologies, and objectives of each client. 
+        <br />
+        <br />
+        <span className="text-base font-bold text-red-500">
+          Some of our services include:
+        </span>
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <ServiceCard
+            icon={
+              <svg
+                className="w-6 h-6 text-primary-red mb-2"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16M8 6v12"
+                />
+              </svg>
+            }
+            title="Data Gathering & Integration"
+            description="Gather, preprocess, and maintain datasets, including assistance with selecting suppliers that best fit specific needs, ensuring smooth integration and readiness for analysis."
+          />
           <ServiceCard
             icon={
               <svg
@@ -208,7 +233,7 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             }
-            title="Performance Analysis"
+            title="Tactical & Performance Intelligence"
             description="Comprehensive evaluations of team and player performance using advanced metrics and multi-source data integration."
           />
           <ServiceCard
@@ -227,22 +252,6 @@ export default function Home() {
             }
             title="Scouting & Recruitment Support"
             description="Data-informed profiling and benchmarking to assist clubs and agencies in making informed recruitment decisions."
-          />
-          <ServiceCard
-            icon={
-              <svg
-                className="w-6 h-6 text-primary-red mb-2"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2a4 4 0 018 0v2" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 12V8a4 4 0 00-8 0v4" />
-              </svg>
-            }
-            title="Opponent Analysis"
-            description="Structured tactical assessments and statistical reports to support match preparation and opposition strategy."
           />
           <ServiceCard
             icon={
