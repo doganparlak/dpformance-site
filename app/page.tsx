@@ -12,25 +12,26 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
 
-    // Scroll listener to update active nav link
     const handleScroll = () => {
-      const sections = ['about-us', 'what-we-do', 'trusted-by', 'contact'];
-      let current = 'about-us';
+      const sections = ['about-us', 'founder', 'what-we-do', 'trusted-by', 'contact'];
+      let closestSection = 'about-us';
+      let closestDistance = Infinity;
 
       for (const sec of sections) {
         const elem = document.getElementById(sec);
         if (elem) {
           const rect = elem.getBoundingClientRect();
-          const threshold = window.innerHeight * 0.3; // Adjust this to be more or less sensitive
-          if (rect.top <= threshold && rect.bottom >= threshold) {
-            current = sec;
-            break;
+          const distance = Math.abs(rect.top);
+          if (rect.top <= window.innerHeight * 0.5 && distance < closestDistance) {
+            closestSection = sec;
+            closestDistance = distance;
           }
         }
       }
 
-      setActiveSection(current);
+      setActiveSection(closestSection);
     };
+
 
 
     window.addEventListener('scroll', handleScroll);
@@ -65,9 +66,9 @@ export default function Home() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 flex flex-col items-center text-center">
+    <main className="min-h-screen bg-gray-950 text-white px-6 flex flex-col items-center text-center">
       {/* Header Navigation */}
-      <header className="w-full max-w-6xl py-4 flex justify-center sticky top-0 z-50 bg-black bg-opacity-90 border-b border-gray-800 shadow-md backdrop-blur-sm">
+      <header className="w-full max-w-6xl py-4 flex justify-center sticky top-0 z-50 bg-gray-950 bg-opacity-90 border-b border-gray-800 shadow-md backdrop-blur-sm">
         <nav className="flex gap-8 text-sm sm:text-base font-semibold">
           <a
             href="#about-us"
@@ -78,6 +79,16 @@ export default function Home() {
             }`}
           >
             About Us
+          </a>
+          <a
+            href="#founder"
+            className={`pb-1 cursor-pointer transition-colors border-b-2 ${
+              activeSection === 'founder'
+                ? 'border-primary-red text-primary-red'
+                : 'border-transparent hover:border-primary-red hover:text-primary-red'
+            }`}
+          >
+           Founder
           </a>
           <a
             href="#what-we-do"
@@ -147,6 +158,33 @@ export default function Home() {
         </button>
 
       </section>
+
+      {/* Founder Section */}
+      <section id="founder" className="mt-20 max-w-4xl w-full text-left px-4">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">Meet the Founder</h2>
+        <div className="bg-gray-900 rounded-xl p-6 shadow-md text-gray-300">
+          <div className="flex flex-col items-center mb-4">
+            <h3 className="text-2xl font-bold text-red-500">
+              <a 
+                href="https://doganparlak.github.io" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Dogan Parlak
+              </a>
+            </h3>
+            <p className="text-lg font-medium text-white">Data Scientist</p>
+          </div>
+          <p>
+            Dogan holds a BSc in Electrical and Electronics Engineering and an MSc in Computer Science from the University of Zurich with a major in Data Science and a minor in Banking and Finance. His work bridges data science and football strategy, combining academic rigor with practical impact.
+          </p>
+          <p className="mt-4">
+            He has collaborated with <span className="font-semibold text-white">FIFA</span> and <span className="font-semibold text-white">UEFA</span> on advanced football analytics initiatives—developing projects such as an open-source implementation of FIFA’s Enhanced Football Intelligence framework, player workload analysis, technical metric automation, tactical inference, and match reporting. These efforts utilized tracking data, event data, competition data, as well as OPTA and Transfermarkt datasets to generate strategic insights and improve performance evaluation workflows. Prior to founding DPformance, he worked as an AI Engineer, developing intelligent systems that merge human understanding with machine insight.
+          </p>
+        </div>
+      </section>
+
+
 
       {/* What We Do Section */}
       <section id="what-we-do" className="mt-16 max-w-5xl w-full text-left px-4">
