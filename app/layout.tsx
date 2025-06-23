@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Main Page - DPformance",
+  title: "DPformance | Home",
   description: "DPformance Website",
 };
 
