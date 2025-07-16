@@ -14,7 +14,7 @@ export default function Home() {
     document.documentElement.style.scrollBehavior = 'smooth';
 
     const handleScroll = () => {
-      const sections = ['about-us', 'founder', 'what-we-do', 'trusted-by', 'contact'];
+      const sections = ['about-us', 'founder', 'what-we-do', 'contact']; /*['about-us', 'founder', 'what-we-do', 'trusted-by', 'contact']*/
       let closestSection = 'about-us';
       let closestDistance = Infinity;
 
@@ -121,6 +121,7 @@ export default function Home() {
             >
               What We Do
             </a>
+           {/*
             <a
               href="#trusted-by"
               className={`pb-1 cursor-pointer transition-colors border-b-2 ${
@@ -131,6 +132,7 @@ export default function Home() {
             >
               Trusted By
             </a>
+            */}
             <a
               href="#contact"
               className={`pb-1 cursor-pointer transition-colors border-b-2 ${
@@ -323,8 +325,8 @@ export default function Home() {
             />
           </div>
         </section>
-
-        {/* Trusted By Section */}
+        
+        {/* Trusted By Section 
         <section id="trusted-by" className="mt-12 w-full max-w-6xl">
           <h2 className="text-center text-2xl sm:text-3xl font-semibold mb-6">
             Trusted by
@@ -336,6 +338,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        */}
 
         {/* Get In Touch Section with Form */}
         <section id="contact" className="mt-20 max-w-5xl w-full text-center px-4">
