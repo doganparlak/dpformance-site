@@ -198,14 +198,15 @@ export default function Home() {
               </h3>
               <p className="text-lg font-medium text-white">Data Scientist</p>
             </div>
-            <p>
+            <p style={{ textAlign: "justify" }}>
               Dogan holds a BSc in Electrical and Electronics Engineering and an MSc in Computer Science from the University of Zurich with a major in Data Science and a minor in Banking and Finance. His work bridges data science and football strategy, combining academic rigor with practical impact.
             </p>
-            <p className="mt-4">
-              He has utilized <span className="font-semibold text-white">FIFA</span> and <span className="font-semibold text-white">UEFA</span> data —accessed under agreement and with their courtesy— in advanced football analytics initiatives, developing projects such as an open-source implementation of FIFA’s Enhanced Football Intelligence framework, player workload analysis, technical metric automation, tactical inference models, and dynamic match reporting. These efforts utilized tracking data, event data, competition data, as well as OPTA and Transfermarkt datasets to generate strategic insights and improve performance evaluation workflows. Prior to founding DPformance, he worked as an Artificial Intelligence Engineer, developing intelligent systems that merge human understanding with machine insight.
+            <p className="mt-4" style={{ textAlign: "justify" }}>
+              He has utilized <span className="font-semibold text-white">FIFA</span> and <span className="font-semibold text-white">UEFA</span> data, accessed under agreement and with their courtesy, in advanced football analytics initiatives, developing projects such as an open-source implementation of FIFA’s Enhanced Football Intelligence framework, player workload analysis, technical metric automation, tactical inference models, and dynamic match reporting. These efforts utilized tracking data, event data, competition data, as well as OPTA and Transfermarkt datasets to generate strategic insights and improve performance evaluation workflows. Prior to founding DPformance, he worked as an Artificial Intelligence Engineer, developing intelligent systems that merge human understanding with machine insight.
             </p>
           </div>
         </section>
+
 
 
 
