@@ -2,8 +2,11 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
+import ProductsSection from "./ProductsSection";
 import { Mail, Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
+
+const EXTRA_OFFSET = -7; // pixels to scroll past the section top (tweak to taste)
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
@@ -13,28 +16,50 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
 
-    const handleScroll = () => {
-      const sections = ['about-us', 'founder', 'what-we-do', 'contact']; /*['about-us', 'founder', 'what-we-do', 'trusted-by', 'contact']*/
-      let closestSection = 'about-us';
-      let closestDistance = Infinity;
+    const header = document.querySelector('header') as HTMLElement | null;
+    const getHeaderH = () => (header?.offsetHeight ?? 0);
 
-      for (const sec of sections) {
-        const elem = document.getElementById(sec);
-        if (elem) {
-          const rect = elem.getBoundingClientRect();
-          const distance = Math.abs(rect.top);
-          if (rect.top <= window.innerHeight * 0.5 && distance < closestDistance) {
-            closestSection = sec;
-            closestDistance = distance;
-          }
+    const sections = ['about-us', 'founder', 'consultancy', 'products', 'contact'];
+
+    const handleScroll = () => {
+      const headerH = getHeaderH();
+      // Bias the “active” check further down the page:
+      const scrollY = window.scrollY + headerH + EXTRA_OFFSET + 1;
+
+      let closest = 'about-us';
+      let closestDiff = Infinity;
+
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const sectionTop = el.offsetTop; // absolute position
+        const diff = Math.abs(scrollY - sectionTop);
+        if (diff < closestDiff) {
+          closest = id;
+          closestDiff = diff;
         }
       }
-
-      setActiveSection(closestSection);
+      setActiveSection(closest);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
+
+  const scrollToId = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    const headerH = (document.querySelector('header') as HTMLElement | null)?.offsetHeight ?? 0;
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - headerH - EXTRA_OFFSET;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -93,6 +118,7 @@ export default function Home() {
           <nav className="flex gap-8 text-sm sm:text-base font-semibold">
             <a
               href="#about-us"
+              onClick={scrollToId('about-us')}
               className={`pb-1 cursor-pointer transition-colors border-b-2 ${
                 activeSection === 'about-us'
                   ? 'border-primary-red text-primary-red'
@@ -103,6 +129,7 @@ export default function Home() {
             </a>
             <a
               href="#founder"
+              onClick={scrollToId('founder')}
               className={`pb-1 cursor-pointer transition-colors border-b-2 ${
                 activeSection === 'founder'
                   ? 'border-primary-red text-primary-red'
@@ -112,15 +139,28 @@ export default function Home() {
             Founder
             </a>
             <a
-              href="#what-we-do"
+              href="#consultancy"
+              onClick={scrollToId('consultancy')}
               className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'what-we-do'
+                activeSection === 'consultancy'
                   ? 'border-primary-red text-primary-red'
                   : 'border-transparent hover:border-primary-red hover:text-primary-red'
               }`}
             >
-              What We Do
+              Consultancy
             </a>
+            <a
+              href="#products"
+              onClick={scrollToId('products')}
+              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
+                activeSection === 'products'
+                  ? 'border-primary-red text-primary-red'
+                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
+              }`}
+            >
+              Products
+            </a>
+
            {/*
             <a
               href="#trusted-by"
@@ -147,7 +187,7 @@ export default function Home() {
         </header>
 
         {/* About Us Section */}
-        <section id="about-us" className="flex flex-col items-center justify-center mt-10 px-4">
+        <section id="about-us" className="scroll-mt-28 flex flex-col items-center justify-center mt-10 px-4">
           {/* Logo with subtle glow */}
           <div className="animate-fade-in-down mb-8 shadow-[0_0_15px_rgba(239,68,68,0.5)] rounded-2xl">
             <Image
@@ -173,7 +213,7 @@ export default function Home() {
 
           {/* CTA Button */}
           <button
-            onClick={() => document.getElementById('what-we-do')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('consultancy')?.scrollIntoView({ behavior: 'smooth' })}
             className="mb-8 px-6 py-3 bg-primary-red hover:bg-red-700 rounded-full text-white font-semibold transition-colors shadow-md"
             aria-label="Learn more about our services"
           >
@@ -183,7 +223,7 @@ export default function Home() {
         </section>
 
         {/* Founder Section */}
-        <section id="founder" className="mt-20 max-w-4xl w-full text-left px-4">
+        <section id="founder" className="scroll-mt-28 mt-20 max-w-4xl w-full text-left px-4">
           <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">Meet the Founder</h2>
           <div className="bg-gray-900 rounded-xl p-6 shadow-md text-gray-300">
             <div className="flex flex-col items-center mb-4">
@@ -210,9 +250,9 @@ export default function Home() {
 
 
 
-        {/* What We Do Section */}
-        <section id="what-we-do" className="mt-16 max-w-5xl w-full text-left px-4">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">What We Do</h2>
+        {/*Consultancy Section */}
+        <section id="consultancy" className="scroll-mt-28 mt-16 max-w-5xl w-full text-left px-4">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">Consultancy</h2>
           <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
             We deliver tailored data solutions and football analytics to enhance performance, scouting, and tactical understanding for clubs, analysts, and organizations. 
             Our work draws on a wide range of data types — including <span className="text-white font-medium">tracking data, event data, and competition data</span> — 
@@ -327,6 +367,8 @@ export default function Home() {
           </div>
         </section>
         
+        <ProductsSection />
+
         {/* Trusted By Section 
         <section id="trusted-by" className="mt-12 w-full max-w-6xl">
           <h2 className="text-center text-2xl sm:text-3xl font-semibold mb-6">
@@ -342,7 +384,7 @@ export default function Home() {
         */}
 
         {/* Get In Touch Section with Form */}
-        <section id="contact" className="mt-20 max-w-5xl w-full text-center px-4">
+        <section id="contact" className="scroll-mt-28 mt-20 max-w-5xl w-full text-center px-4">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6">Get In Touch</h2>
           <p className="mb-6 text-gray-400 max-w-md mx-auto">
             Reach out to discuss how DPformance can assist your team.
