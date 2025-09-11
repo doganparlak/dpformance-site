@@ -93,7 +93,7 @@ export default function ProductsSection() {
               </h3>
               <p className="mt-3 text-gray-400">
                 DP-ScoutIQ is an advanced chatbot for football scouting. Built on a Retrieval-Augmented
-                Generation (RAG) architecture and multi-agent orchestration, it helps clubs analyze,
+                Generation (RAG) architecture and multi-agent orchestration, it helps you analyze,
                 compare, and recruit players—fast.
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-gray-400">
