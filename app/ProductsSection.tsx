@@ -56,7 +56,7 @@ export default function ProductsSection() {
   };
 
   return (
-    <section id="products" className="scroll-mt-28 relative py-20 sm:py-24">
+    <section id="products" className="scroll-mt-28 w-full mt-24 md:mt-28">
       {/* Soft background accent (dark with subtle red tint) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-[-10rem] h-[28rem] w-[56rem] -translate-x-1/2 rounded-full bg-red-500/5 blur-3xl" />

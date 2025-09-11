@@ -3,10 +3,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import ProductsSection from "./ProductsSection";
+import WorksSection from "./WorksSection";
 import { Mail, Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
-const EXTRA_OFFSET = -7; // pixels to scroll past the section top (tweak to taste)
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
@@ -16,48 +15,58 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
 
+    const ids = ['about-us', 'founder', 'consultancy', 'products', 'selected-works', 'contact'];
     const header = document.querySelector('header') as HTMLElement | null;
-    const getHeaderH = () => (header?.offsetHeight ?? 0);
+    const headerH = header?.offsetHeight ?? 0;
 
-    const sections = ['about-us', 'founder', 'consultancy', 'products', 'contact'];
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
 
-    const handleScroll = () => {
-      const headerH = getHeaderH();
-      // Bias the “active” check further down the page:
-      const scrollY = window.scrollY + headerH + EXTRA_OFFSET + 1;
+    // Observe what's in the “viewport window” that starts just below the sticky header
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Pick the most visible section within the observed window
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-      let closest = 'about-us';
-      let closestDiff = Infinity;
-
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const sectionTop = el.offsetTop; // absolute position
-        const diff = Math.abs(scrollY - sectionTop);
-        if (diff < closestDiff) {
-          closest = id;
-          closestDiff = diff;
+        if (visible[0]) {
+          setActiveSection((visible[0].target as HTMLElement).id);
+        } else {
+          // Fallback: find the last section whose top passed the header line
+          const line = headerH + 1;
+          let current = ids[0];
+          for (const id of ids) {
+            const el = document.getElementById(id);
+            if (!el) continue;
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= line) current = id; else break;
+          }
+          setActiveSection(current);
         }
+      },
+      {
+        root: null,
+        // Shift the observed area down by the header height,
+        // and end it around 60% from the bottom to avoid “next section” early activation.
+        rootMargin: `-${headerH}px 0px -40% 0px`,
+        threshold: [0, 0.25, 0.5, 0.75, 1],
       }
-      setActiveSection(closest);
-    };
+    );
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
+
+
 
   const scrollToId = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     const el = document.getElementById(id);
-    const headerH = (document.querySelector('header') as HTMLElement | null)?.offsetHeight ?? 0;
     if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - headerH - EXTRA_OFFSET;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      setActiveSection(id); // highlight immediately
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' }); // relies on scroll-mt-28
     }
   };
 
@@ -160,6 +169,18 @@ export default function Home() {
             >
               Products
             </a>
+            <a
+              href="#selected-works"
+              onClick={scrollToId('selected-works')}
+              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
+                activeSection === 'selected-works'
+                  ? 'border-primary-red text-primary-red'
+                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
+              }`}
+            >
+              Selected Works
+            </a>
+
 
            {/*
             <a
@@ -175,6 +196,7 @@ export default function Home() {
             */}
             <a
               href="#contact"
+              onClick={scrollToId('contact')}
               className={`pb-1 cursor-pointer transition-colors border-b-2 ${
                 activeSection === 'contact'
                   ? 'border-primary-red text-primary-red'
@@ -368,6 +390,7 @@ export default function Home() {
         </section>
         
         <ProductsSection />
+        <WorksSection /> 
 
         {/* Trusted By Section 
         <section id="trusted-by" className="mt-12 w-full max-w-6xl">
