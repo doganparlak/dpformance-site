@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
 
-    const ids = ['about-us', 'founder', 'consultancy', 'products', 'selected-works', 'contact'];
+    const ids = ['about-us', 'founder', 'consultancy', 'selected-works', 'contact']; //'products'
     const header = document.querySelector('header') as HTMLElement | null;
     const headerH = header?.offsetHeight ?? 0;
 
@@ -158,7 +158,7 @@ export default function Home() {
             >
               Consultancy
             </a>
-            <a
+            {/*<a
               href="#products"
               onClick={scrollToId('products')}
               className={`pb-1 cursor-pointer transition-colors border-b-2 ${
@@ -168,7 +168,7 @@ export default function Home() {
               }`}
             >
               Products
-            </a>
+            </a>*/}
             <a
               href="#selected-works"
               onClick={scrollToId('selected-works')}
@@ -389,7 +389,7 @@ export default function Home() {
           </div>
         </section>
         
-        <ProductsSection />
+        {/* <ProductsSection /> */}
         <WorksSection /> 
 
         {/* Trusted By Section 
