@@ -115,22 +115,23 @@ export default function WorksSection() {
           <TabButton
             active={tab === 'organizational'}
             onClick={() => setTab('organizational')}
-            icon={<Building2 className="h-4 w-4" />}
+            icon={<Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
             label="Organizational"
           />
           <TabButton
             active={tab === 'academic'}
             onClick={() => setTab('academic')}
-            icon={<GraduationCap className="h-4 w-4" />}
+            icon={<GraduationCap className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
             label="Academy R&D"
           />
           <TabButton
             active={tab === 'independent'}
             onClick={() => setTab('independent')}
-            icon={<Sparkles className="h-4 w-4" />}
+            icon={<Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
             label="Independent"
           />
         </div>
+
 
         {/* Panels */}
         <div className="mt-8">
@@ -255,16 +256,24 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm transition-colors ${
-        active ? 'bg-primary-red text-white' : 'text-gray-300 hover:bg-gray-900 hover:text-white'
-      }`}
+      className={[
+        // allow shrinking inside flex
+        'min-w-0 flex flex-1 items-center justify-center',
+        // tighter gaps/padding + font on mobile, scale up on larger screens
+        'gap-1.5 sm:gap-2 rounded-md sm:rounded-lg px-2 sm:px-3 md:px-4 py-1.5 sm:py-2',
+        'text-xs sm:text-sm transition-colors',
+        active
+          ? 'bg-primary-red text-white'
+          : 'text-gray-300 hover:bg-gray-900 hover:text-white',
+      ].join(' ')}
       aria-pressed={active}
     >
       {icon}
-      {label}
+      <span className="truncate">{label}</span>
     </button>
   );
 }
+
 
 function OrganizationalPanel({ data }: { data: Record<'UEFA' | 'FIFA', Work[]> }) {
   return (
