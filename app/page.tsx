@@ -5,70 +5,70 @@ import Image from 'next/image';
 import ProductsSection from "./ProductsSection";
 import WorksSection from "./WorksSection";
 import { Mail, Phone } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [activeSection, setActiveSection] = useState<string>('about-us');
 
+  const [headerH, setHeaderH] = useState(0);
+  const ids = useRef(['about-us', 'founder', 'consultancy', 'selected-works', 'contact']).current;
+
+  // Measure header height, set smooth scroll (respect reduced motion), expose CSS var
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    const ids = ['about-us', 'founder', 'consultancy', 'selected-works', 'contact']; //'products'
     const header = document.querySelector('header') as HTMLElement | null;
-    const headerH = header?.offsetHeight ?? 0;
 
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean) as HTMLElement[];
+    const applyScrollBehavior = () => {
+      const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      document.documentElement.style.scrollBehavior = prefersReduced ? 'auto' : 'smooth';
+    };
 
-    // Observe what's in the “viewport window” that starts just below the sticky header
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the most visible section within the observed window
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const measure = () => {
+      const h = header?.offsetHeight ?? 0;
+      setHeaderH(h);
+      document.documentElement.style.setProperty('--header-h', `${h}px`);
+      applyScrollBehavior();
+    };
 
-        if (visible[0]) {
-          setActiveSection((visible[0].target as HTMLElement).id);
-        } else {
-          // Fallback: find the last section whose top passed the header line
-          const line = headerH + 1;
-          let current = ids[0];
-          for (const id of ids) {
-            const el = document.getElementById(id);
-            if (!el) continue;
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= line) current = id; else break;
-          }
-          setActiveSection(current);
-        }
-      },
-      {
-        root: null,
-        // Shift the observed area down by the header height,
-        // and end it around 60% from the bottom to avoid “next section” early activation.
-        rootMargin: `-${headerH}px 0px -40% 0px`,
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      }
-    );
+    measure();
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    const ro = header ? new ResizeObserver(measure) : null;
+    ro?.observe(header!);
+
+    const onResize = () => measure();
+    window.addEventListener('resize', onResize);
+
+    const mql = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const motionListener = () => applyScrollBehavior();
+    mql?.addEventListener?.('change', motionListener);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+      ro?.disconnect();
+      mql?.removeEventListener?.('change', motionListener);
+    };
   }, []);
 
-
-
-  const scrollToId = (id: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
+  // Header-aware scrolling for clicks
+  const scrollToId = (id: string) => (e?: React.MouseEvent) => {
+    e?.preventDefault();
     const el = document.getElementById(id);
-    if (el) {
-      setActiveSection(id); // highlight immediately
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' }); // relies on scroll-mt-28
-    }
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const targetY = window.scrollY + rect.top - headerH - 8; // tiny breathing room
+    history.replaceState(null, '', `#${id}`); // keep URL in sync, no jump
+    window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
   };
+
+  // Honor initial #hash with header offset once sizes are known
+  useEffect(() => {
+    if (headerH === 0) return;
+    if (!location.hash) return;
+    const id = location.hash.slice(1);
+    const t = setTimeout(() => scrollToId(id)(), 0);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [headerH]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -94,33 +94,38 @@ export default function Home() {
     }
   };
 
-  // Scroll to top function for back-to-top button
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-      <>
-        <Head>
-          <title>Unlock the Power of Football Intelligence | DPformance</title>
-          <meta
-            name="description"
-            content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game. Founded by Dogan Parlak, MSc in Computer Science and expert in football data science."
-          />
-          <meta property="og:title" content="Unlock the Power of Football Intelligence | DPformance" />
-          <meta
-            property="og:description"
-            content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game."
-          />
-          <meta property="og:url" content="https://dpformance.com" />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Unlock the Power of Football Intelligence | DPformance" />
-          <meta
-            name="twitter:description"
-            content="DPformance is a data-driven consultancy providing advanced football analytics and insights."
-          />
-          <meta name="twitter:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
+    <>
+      <Head>
+        <title>Unlock the Power of Football Intelligence | DPformance</title>
+        <meta
+          name="description"
+          content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game. Founded by Dogan Parlak, MSc in Computer Science and expert in football data science."
+        />
+        <meta property="og:title" content="Unlock the Power of Football Intelligence | DPformance" />
+        <meta
+          property="og:description"
+          content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game."
+        />
+        <meta property="og:url" content="https://dpformance.com" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Unlock the Power of Football Intelligence | DPformance" />
+        <meta
+          name="twitter:description"
+          content="DPformance is a data-driven consultancy providing advanced football analytics and insights."
+        />
+        <meta name="twitter:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
+
+        {/* Native hash navigation padding as a graceful fallback */}
+        <style jsx global>{`
+          html { scroll-padding-top: var(--header-h, 0px); }
+        `}</style>
       </Head>
+
       <main className="min-h-screen bg-gray-950 text-white px-6 flex flex-col items-center text-center">
         {/* Header Navigation */}
         <header className="w-full max-w-6xl py-4 flex justify-center sticky top-0 z-50 bg-gray-950 bg-opacity-90 border-b border-gray-800 shadow-md backdrop-blur-sm">
@@ -128,80 +133,42 @@ export default function Home() {
             <a
               href="#about-us"
               onClick={scrollToId('about-us')}
-              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'about-us'
-                  ? 'border-primary-red text-primary-red'
-                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
-              }`}
+              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
             >
               About Us
             </a>
             <a
               href="#founder"
               onClick={scrollToId('founder')}
-              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'founder'
-                  ? 'border-primary-red text-primary-red'
-                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
-              }`}
+              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
             >
-            Founder
+              Founder
             </a>
             <a
               href="#consultancy"
               onClick={scrollToId('consultancy')}
-              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'consultancy'
-                  ? 'border-primary-red text-primary-red'
-                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
-              }`}
+              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
             >
               Consultancy
             </a>
-            {/*<a
+            {/* <a
               href="#products"
               onClick={scrollToId('products')}
-              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'products'
-                  ? 'border-primary-red text-primary-red'
-                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
-              }`}
+              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
             >
               Products
-            </a>*/}
+            </a> */}
             <a
               href="#selected-works"
               onClick={scrollToId('selected-works')}
-              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'selected-works'
-                  ? 'border-primary-red text-primary-red'
-                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
-              }`}
+              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
             >
               Selected Works
             </a>
-
-
-           {/*
-            <a
-              href="#trusted-by"
-              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'trusted-by'
-                  ? 'border-primary-red text-primary-red'
-                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
-              }`}
-            >
-              Trusted By
-            </a>
-            */}
             <a
               href="#contact"
               onClick={scrollToId('contact')}
-              className={`pb-1 cursor-pointer transition-colors border-b-2 ${
-                activeSection === 'contact'
-                  ? 'border-primary-red text-primary-red'
-                  : 'border-transparent hover:border-primary-red hover:text-primary-red'
-              }`}
+              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
             >
               Contact
             </a>
@@ -209,8 +176,7 @@ export default function Home() {
         </header>
 
         {/* About Us Section */}
-        <section id="about-us" className="scroll-mt-28 flex flex-col items-center justify-center mt-10 px-4">
-          {/* Logo with subtle glow */}
+        <section id="about-us" className="flex flex-col items-center justify-center mt-10 px-4">
           <div className="animate-fade-in-down mb-8 shadow-[0_0_15px_rgba(239,68,68,0.5)] rounded-2xl">
             <Image
               src="/logo-dpformance-transparent.png"
@@ -222,37 +188,34 @@ export default function Home() {
             />
           </div>
 
-          {/* Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold max-w-3xl leading-tight mb-4">
             Unlock the Power of <span className="text-primary-red">Football Intelligence</span>
           </h1>
 
-          {/* Description */}
           <p className="text-lg sm:text-xl text-gray-400 max-w-xl mb-6">
             DPformance is a data-driven consultancy providing advanced football analytics and insights to
             support smarter understanding, communication, and strategy across the game.
           </p>
 
-          {/* CTA Button */}
+          {/* Use header-aware scroll helper */}
           <button
-            onClick={() => document.getElementById('consultancy')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={scrollToId('consultancy')}
             className="mb-8 px-6 py-3 bg-primary-red hover:bg-red-700 rounded-full text-white font-semibold transition-colors shadow-md"
             aria-label="Learn more about our services"
           >
             Learn More
           </button>
-
         </section>
 
         {/* Founder Section */}
-        <section id="founder" className="scroll-mt-28 mt-20 max-w-4xl w-full text-left px-4">
+        <section id="founder" className="mt-20 max-w-4xl w-full text-left px-4">
           <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">Meet the Founder</h2>
           <div className="bg-gray-900 rounded-xl p-6 shadow-md text-gray-300">
             <div className="flex flex-col items-center mb-4">
               <h3 className="text-2xl font-bold text-red-500">
-                <a 
-                  href="https://doganparlak.github.io" 
-                  target="_blank" 
+                <a
+                  href="https://doganparlak.github.io"
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   Dogan Parlak
@@ -269,21 +232,18 @@ export default function Home() {
           </div>
         </section>
 
-
-
-
-        {/*Consultancy Section */}
-        <section id="consultancy" className="scroll-mt-28 mt-16 max-w-5xl w-full text-left px-4">
+        {/* Consultancy Section */}
+        <section id="consultancy" className="mt-16 max-w-5xl w-full text-left px-4">
           <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">Consultancy</h2>
           <p className="text-gray-400 text-center mb-10 max-w-2xl mx-auto">
-            We deliver tailored data solutions and football analytics to enhance performance, scouting, and tactical understanding for clubs, analysts, and organizations. 
-            Our work draws on a wide range of data types — including <span className="text-white font-medium">tracking data, event data, and competition data</span> — 
-            and is shaped by the specific structures, technologies, and objectives of each client. 
-          <br />
-          <br />
-          <span className="text-base font-bold text-red-500">
-            Some of our services include:
-          </span>
+            We deliver tailored data solutions and football analytics to enhance performance, scouting, and tactical understanding for clubs, analysts, and organizations.
+            Our work draws on a wide range of data types — including <span className="text-white font-medium">tracking data, event data, and competition data</span> —
+            and is shaped by the specific structures, technologies, and objectives of each client.
+            <br />
+            <br />
+            <span className="text-base font-bold text-red-500">
+              Some of our services include:
+            </span>
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <ServiceCard
@@ -388,26 +348,14 @@ export default function Home() {
             />
           </div>
         </section>
-        
-        {/* <ProductsSection /> */}
-        <WorksSection /> 
 
-        {/* Trusted By Section 
-        <section id="trusted-by" className="mt-12 w-full max-w-6xl">
-          <h2 className="text-center text-2xl sm:text-3xl font-semibold mb-6">
-            Trusted by
-          </h2>
-
-          <div className="relative overflow-hidden">
-            <div className="flex gap-10 whitespace-nowrap animate-scroll-left">
-              <PartnerLogos />
-            </div>
-          </div>
+        {/* Selected Works: ensure the correct id exists */}
+        <section id="selected-works" className="mt-16 w-full max-w-6xl px-4">
+          <WorksSection />
         </section>
-        */}
 
-        {/* Get In Touch Section with Form */}
-        <section id="contact" className="scroll-mt-28 mt-20 max-w-5xl w-full text-center px-4">
+        {/* Contact Section */}
+        <section id="contact" className="mt-20 max-w-5xl w-full text-center px-4">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6">Get In Touch</h2>
           <p className="mb-6 text-gray-400 max-w-md mx-auto">
             Reach out to discuss how DPformance can assist your team.
@@ -476,7 +424,6 @@ export default function Home() {
             )}
           </form>
 
-          {/* Contact Icons with pulse hover */}
           <div className="flex justify-center gap-10 mt-12 text-gray-400 text-3xl">
             <a
               href="mailto:dogan.parlak@dpformance.com"
@@ -548,4 +495,3 @@ function PartnerLogos() {
     </div>
   );
 }
-
