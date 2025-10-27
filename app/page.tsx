@@ -96,116 +96,118 @@ export default function Home() {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  return (
-    <>
-      <Head>
-        <title>Unlock the Power of Football Intelligence | DPformance</title>
-        <meta
-          name="description"
-          content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game. Founded by Dogan Parlak, MSc in Computer Science and expert in football data science."
-        />
-        <meta property="og:title" content="Unlock the Power of Football Intelligence | DPformance" />
-        <meta
-          property="og:description"
-          content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game."
-        />
-        <meta property="og:url" content="https://dpformance.com" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Unlock the Power of Football Intelligence | DPformance" />
-        <meta
-          name="twitter:description"
-          content="DPformance is a data-driven consultancy providing advanced football analytics and insights."
-        />
-        <meta name="twitter:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
+return (
+  <>
+    <Head>
+      <title>Unlock the Power of Football Intelligence | DPformance</title>
+      <meta
+        name="description"
+        content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game. Founded by Dogan Parlak, MSc in Computer Science and expert in football data science."
+      />
+      <meta property="og:title" content="Unlock the Power of Football Intelligence | DPformance" />
+      <meta
+        property="og:description"
+        content="DPformance is a data-driven consultancy providing advanced football analytics and insights to support smarter understanding, communication, and strategy across the game."
+      />
+      <meta property="og:url" content="https://dpformance.com" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Unlock the Power of Football Intelligence | DPformance" />
+      <meta
+        name="twitter:description"
+        content="DPformance is a data-driven consultancy providing advanced football analytics and insights."
+      />
+      <meta name="twitter:image" content="https://dpformance.com/logo-dpformance-transparent.png" />
 
-        {/* Native hash navigation padding as a graceful fallback */}
-        <style jsx global>{`
-          html { scroll-padding-top: var(--header-h, 0px); }
-        `}</style>
-      </Head>
+      {/* Native hash navigation padding as a graceful fallback */}
+      <style jsx global>{`
+        html { scroll-padding-top: var(--header-h, 0px); }
+      `}</style>
+    </Head>
 
-      <main className="min-h-screen bg-gray-950 text-white px-6 flex flex-col items-center text-center">
-        {/* Header Navigation */}
-        <header className="w-full max-w-6xl py-4 flex justify-center sticky top-0 z-50 bg-gray-950 bg-opacity-90 border-b border-gray-800 shadow-md backdrop-blur-sm">
-          <nav className="flex gap-8 text-sm sm:text-base font-semibold">
-            <a
-              href="#about-us"
-              onClick={scrollToId('about-us')}
-              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
-            >
-              About Us
-            </a>
-            <a
-              href="#founder"
-              onClick={scrollToId('founder')}
-              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
-            >
-              Founder
-            </a>
-            <a
-              href="#consultancy"
-              onClick={scrollToId('consultancy')}
-              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
-            >
-              Consultancy
-            </a>
-            {/* <a
-              href="#products"
-              onClick={scrollToId('products')}
-              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
-            >
-              Products
-            </a> */}
-            <a
-              href="#selected-works"
-              onClick={scrollToId('selected-works')}
-              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
-            >
-              Selected Works
-            </a>
-            <a
-              href="#contact"
-              onClick={scrollToId('contact')}
-              className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
-            >
-              Contact
-            </a>
-          </nav>
-        </header>
-
-        {/* About Us Section */}
-        <section id="about-us" className="flex flex-col items-center justify-center mt-10 px-4">
-          <div className="animate-fade-in-down mb-8 shadow-[0_0_15px_rgba(239,68,68,0.5)] rounded-2xl">
-            <Image
-              src="/logo-dpformance-transparent.png"
-              alt="DPformance Logo"
-              width={300}
-              height={300}
-              priority
-              className="rounded-2xl shadow-lg"
-            />
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold max-w-3xl leading-tight mb-4">
-            Unlock the Power of <span className="text-primary-red">Football Intelligence</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-gray-400 max-w-xl mb-6">
-            DPformance is a data-driven consultancy providing advanced football analytics and insights to
-            support smarter understanding, communication, and strategy across the game.
-          </p>
-
-          {/* Use header-aware scroll helper */}
-          <button
-            onClick={scrollToId('consultancy')}
-            className="mb-8 px-6 py-3 bg-primary-red hover:bg-red-700 rounded-full text-white font-semibold transition-colors shadow-md"
-            aria-label="Learn more about our services"
+    <main className="min-h-screen bg-gray-950 text-white px-6 flex flex-col items-center text-center">
+      {/* Header Navigation */}
+      <header className="w-full max-w-6xl py-4 flex justify-center sticky top-0 z-50 bg-gray-950 bg-opacity-90 border-b border-gray-800 shadow-md backdrop-blur-sm">
+        <nav className="flex gap-8 text-sm sm:text-base font-semibold">
+          <a
+            href="#about-us"
+            onClick={scrollToId('about-us')}
+            className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
           >
-            Learn More
-          </button>
-        </section>
+            About Us
+          </a>
+          <a
+            href="#founder"
+            onClick={scrollToId('founder')}
+            className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
+          >
+            Founder
+          </a>
+          <a
+            href="#consultancy"
+            onClick={scrollToId('consultancy')}
+            className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
+          >
+            Consultancy
+          </a>
+          {/* <a
+            href="#products"
+            onClick={scrollToId('products')}
+            className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
+          >
+            Products
+          </a> */}
+          <a
+            href="#selected-works"
+            onClick={scrollToId('selected-works')}
+            className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
+          >
+            Selected Works
+          </a>
+          <a
+            href="#contact"
+            onClick={scrollToId('contact')}
+            className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
+          >
+            Contact
+          </a>
+        </nav>
+      </header>
+
+      {/* About Us Section */}
+      <section id="about-us" className="flex flex-col items-center justify-center mt-10 px-4">
+        <div className="animate-fade-in-down mb-8 shadow-[0_0_15px_rgba(239,68,68,0.5)] rounded-2xl">
+          <Image
+            src="/logo-dpformance-transparent.png"
+            alt="DPformance Logo"
+            width={300}
+            height={300}
+            priority
+            className="rounded-2xl shadow-lg"
+          />
+        </div>
+
+        {/* Updated headline with explicit line break */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold max-w-3xl leading-tight mb-4">
+          <span className="block">Unlock the Power of</span>
+          <span className="block text-primary-red">Football Intelligence</span>
+        </h1>
+
+        <p className="text-lg sm:text-xl text-gray-400 max-w-xl mb-6">
+          DPformance is a data-driven consultancy providing advanced football analytics and insights to
+          support smarter understanding, communication, and strategy across the game.
+        </p>
+
+        {/* Header-aware scroll helper */}
+        <button
+          onClick={scrollToId('consultancy')}
+          className="mb-8 px-6 py-3 bg-primary-red hover:bg-red-700 rounded-full text-white font-semibold transition-colors shadow-md"
+          aria-label="Learn more about our services"
+        >
+          Learn More
+        </button>
+      </section>
 
         {/* Founder Section */}
         <section id="founder" className="mt-20 max-w-4xl w-full text-left px-4">
