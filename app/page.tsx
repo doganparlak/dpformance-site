@@ -3,6 +3,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import WorksSection from "./WorksSection";
+import ScoutWiseSection from "./ScoutWiseSection";
 import { Mail, Phone } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
@@ -11,7 +12,7 @@ export default function Home() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const [headerH, setHeaderH] = useState(0);
-  const ids = useRef(['about-us', 'founder', 'consultancy', 'selected-works', 'contact']).current;
+  const ids = useRef(['about-us', 'founder', 'consultancy', 'selected-works', 'scoutwise', 'contact']).current;
 
   // Measure header height, set smooth scroll (respect reduced motion), expose CSS var
   useEffect(() => {
@@ -158,12 +159,21 @@ return (
             Selected Works
           </a>
           <a
+            href="#scoutwise"
+            onClick={scrollToId('scoutwise')}
+            className="group pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red"
+          >
+            <span className="group-hover:text-primary-red text-white">Scout</span>
+            <span className="text-[#16A34A]">Wise</span>
+          </a>
+          <a
             href="#contact"
             onClick={scrollToId('contact')}
             className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
           >
             Contact
           </a>
+
         </nav>
       </header>
 
@@ -347,6 +357,9 @@ return (
         <section id="selected-works" className="mt-16 w-full max-w-6xl px-4">
           <WorksSection />
         </section>
+
+        {/* ScoutWise product highlight */}
+        <ScoutWiseSection />
 
         {/* Contact Section */}
         <section id="contact" className="mt-20 max-w-5xl w-full text-center px-4">
