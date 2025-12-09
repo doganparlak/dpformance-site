@@ -2,7 +2,6 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
-import ProductsSection from "./ProductsSection";
 import WorksSection from "./WorksSection";
 import { Mail, Phone } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
@@ -151,13 +150,6 @@ return (
           >
             Consultancy
           </a>
-          {/* <a
-            href="#products"
-            onClick={scrollToId('products')}
-            className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
-          >
-            Products
-          </a> */}
           <a
             href="#selected-works"
             onClick={scrollToId('selected-works')}
