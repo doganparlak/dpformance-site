@@ -60,7 +60,7 @@ export default function ScoutWiseSection() {
             <Feature
               Icon={Users}
               title="Player Cards"
-              text="Name, gender, nationality, team, age, height, weight and a 0–100 Potential score in one place."
+              text="Name, gender, nationality, team, age, height, weight and a potential score in one place."
             />
             <Feature
               Icon={BarChart3}
