@@ -23,7 +23,7 @@ export default function ScoutWiseSection() {
           <div className="bg-black/40 rounded-2xl p-4 w-full max-w-[280px] flex justify-center">
             {/* Place your logo in /public/scoutwise_logo.jpeg or adjust src */}
             <Image
-              src="/scoutwise_logo.jpeg"
+              src="/scoutwise_logo.png"
               alt="scoutwise.ai Logo"
               width={260}
               height={260}
