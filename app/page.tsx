@@ -5,6 +5,7 @@ import Image from 'next/image';
 import WorksSection from "./WorksSection";
 import ScoutWiseSection from "./ScoutWiseSection";
 import { Mail, Phone } from 'lucide-react';
+import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
@@ -179,7 +180,16 @@ return (
 
       {/* About Us Section */}
       <section id="about-us" className="flex flex-col items-center justify-center mt-10 px-4">
-        <div className="animate-fade-in-down mb-8 shadow-[0_0_15px_rgba(239,68,68,0.5)] rounded-2xl">
+        <motion.div
+          initial={{ opacity: 0, x: 160, y: -160 }}      // start off-screen, top-right
+          whileInView={{ opacity: 1, x: 0, y: 0 }}       // move to center
+          viewport={{ once: true }}                      // animate only the first time it appears
+          transition={{
+            duration: 0.9,
+            ease: "easeOut",
+          }}
+          className="mb-8 shadow-[0_0_15px_rgba(239,68,68,0.5)] rounded-2xl" // removed animate-fade-in-down
+        >
           <Image
             src="/logo-dpformance-transparent.png"
             alt="DPformance Logo"
@@ -188,7 +198,9 @@ return (
             priority
             className="rounded-2xl shadow-lg"
           />
-        </div>
+        </motion.div>
+
+
 
         {/* Updated headline with explicit line break */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold max-w-3xl leading-tight mb-4">
@@ -359,7 +371,14 @@ return (
         </section>
 
         {/* ScoutWise product highlight */}
-        <ScoutWiseSection />
+        <section id="scoutwise" className="mt-20 w-full max-w-6xl px-4">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6">
+            <span className="text-white">Scout</span>
+            <span className="text-[#16A34A]">Wise</span>
+          </h2>
+          <ScoutWiseSection />
+        </section>
+
 
         {/* Contact Section */}
         <section id="contact" className="mt-20 max-w-5xl w-full text-center px-4">
