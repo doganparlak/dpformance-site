@@ -33,12 +33,23 @@ export default function ScoutWiseSection({ lang }: { lang: Lang }) {
 
         <p className="text-gray-300 mb-5 text-sm sm:text-base">
           {t.scoutwise.desc.beforeLeagues}{' '}
-          <span className="font-semibold text-white">{t.scoutwise.desc.leaguesHighlight}</span>
-          {t.scoutwise.desc.afterLeagues}{' '}
-          <span className="font-semibold text-white">{t.scoutwise.desc.strategyHighlight}</span>
+          <span className="font-semibold text-white">
+            {t.scoutwise.desc.leaguesHighlight}
+          </span>
+          {t.scoutwise.desc.afterLeagues}
+          <span className="font-semibold text-white">
+            {t.scoutwise.desc.playersHighlight}
+          </span>
+          {t.scoutwise.desc.afterPlayers}
+          <span className="font-semibold text-white">
+            {t.scoutwise.desc.statsHighlight}
+          </span>
+          {t.scoutwise.desc.afterStats}{' '}
+          <span className="font-semibold text-white">
+            {t.scoutwise.desc.strategyHighlight}
+          </span>
           {t.scoutwise.desc.afterStrategy}
         </p>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm text-gray-300">
           <Feature
             Icon={Compass}

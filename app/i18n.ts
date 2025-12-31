@@ -71,12 +71,19 @@ export const I18N = {
       title: 'Your intelligent football scouting companion',
       desc: {
         beforeLeagues:
-          'ScoutWise is our AI-powered scouting assistant that turns your ideas, filters and data into clear, football-specific insights. It covers players from',
+          'ScoutWise is our AI-powered scouting assistant that turns your ideas, filters and data into clear, football-first insights — spanning',
         leaguesHighlight: '113 leagues worldwide',
-        afterLeagues: '. Define your',
+        afterLeagues:
+          ' and ',
+        playersHighlight: '52,000+ players',
+        afterPlayers:
+          ', powered by ',
+        statsHighlight: '75+ stats',
+        afterStats:
+          '. Define your',
         strategyHighlight: 'team strategy & scouting philosophy',
         afterStrategy:
-          ', then chat to discover, compare and shortlist players that truly fit your game model.',
+          ', then chat to explore, compare and shortlist players who genuinely fit your game model.',
       },
       features: {
         strategy: {
@@ -85,15 +92,15 @@ export const I18N = {
         },
         cards: {
           title: 'Player cards',
-          text: 'Name, gender, nationality, team, age, height, weight and a 0–100 Potential score in one place.',
+          text: 'Name, gender, nationality, team, age, height, weight and 0–100 Potential score in one place.',
         },
         radar: {
-          title: 'Radar metrics that matter',
-          text: 'Goalkeeping, Shooting, Passing, Defending, Contribution & Impact, and Errors & Discipline radars for each player.',
+          title: 'Metric visualizations that matter',
+          text: 'Goalkeeping, Shooting, Passing, Defending, Contribution & Impact, and Errors & Discipline plots for each player.',
         },
         reports: {
           title: 'Pro scouting reports',
-          text: 'Generate in-depth reports and portfolio overviews for your tracked players with Pro subscriptions.',
+          text: 'Generate in-depth reports and portfolio overviews for your tracked players.',
         },
       },
       cta: 'Explore ScoutWise.ai',
@@ -261,16 +268,21 @@ export const I18N = {
       },
     },
     scoutwise: {
-      badge: 'Yeni • Yapay Zekâ Destekli Scouting & Transfer Analitiği',
-      title: 'Akıllı futbol scouting yardımcınız',
+      badge: 'Yeni • Yapay Zekâ Destekli Oyuncu Keşfi & Transfer Analitiği',
+      title: 'Akıllı Oyuncu Keşfi Mentörün',
       desc: {
         beforeLeagues:
-          'ScoutWise, fikirlerinizi ve filtrelerinizi futbol odaklı net içgörülere dönüştüren, veri tabanlı, yapay zekâ destekli scouting asistanınızdır.',
-        leaguesHighlight: 'Dünya genelinde 113+ ligden, 55000+ fazla oyuncuyu kapsar',
-        afterLeagues: '.',
-        strategyHighlight: 'Takım stratejinizi ve scouting felsefenizi',
+          'ScoutWise; fikirlerinizi ve tercihlerinizi futbol odaklı, net değerlendirmelere dönüştüren veri tabanlı, yapay zekâ destekli bir oyuncu keşfi asistanıdır. Dünya genelinde ',
+        leaguesHighlight: '113+ lig',
+        afterLeagues: ' ve ',
+        playersHighlight: '55.000+ oyuncuyu',
+        afterPlayers: ' kapsar — ',
+        statsHighlight: '75+ istatistik',
+        afterStats:
+          ' ile karar süreçlerinizi destekler.',
+        strategyHighlight: 'Takım stratejinizi ve scouting felsefeniz',
         afterStrategy:
-          ' tanımlayın; ardından ScoutWise ile sohbet ederek oyun modelinize gerçekten uyan oyuncuları keşfedin, karşılaştırın ve portföyünüze ekleyin.',
+          ' esas alınarak; ScoutWise ile sohbet ederken oyun modelinize uyan oyuncuları keşfetmenize, karşılaştırmanıza ve portföyünüzü oluşturmanıza yardımcı olur.',
       },
       features: {
         strategy: {
