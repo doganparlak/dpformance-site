@@ -71,7 +71,7 @@ export const I18N = {
       title: 'Your intelligent football scouting companion',
       desc: {
         beforeLeagues:
-          'ScoutWise is our AI-powered scouting assistant that turns your ideas, filters and data into clear, football-first insights — spanning',
+          'ScoutWise is an AI-powered scouting assistant that turns your ideas, filters and data into clear, football-first insights — spanning',
         leaguesHighlight: '113 leagues worldwide',
         afterLeagues:
           ' and ',
@@ -80,7 +80,7 @@ export const I18N = {
           ', powered by ',
         statsHighlight: '75+ stats',
         afterStats:
-          '. Define your',
+          '. You can define your',
         strategyHighlight: 'team strategy & scouting philosophy',
         afterStrategy:
           ', then chat to explore, compare and shortlist players who genuinely fit your game model.',
@@ -99,7 +99,7 @@ export const I18N = {
           text: 'Goalkeeping, Shooting, Passing, Defending, Contribution & Impact, and Errors & Discipline plots for each player.',
         },
         reports: {
-          title: 'Pro scouting reports',
+          title: 'Professional scouting reports',
           text: 'Generate in-depth reports and portfolio overviews for your tracked players.',
         },
       },
@@ -291,15 +291,15 @@ export const I18N = {
         },
         cards: {
           title: 'Oyuncu kartları',
-          text: 'İsim, cinsiyet, ülke, takım, pozisyon, yaş, boy, kilo ve 0–100 Potansiyel puanı tek ekranda.',
+          text: 'İsim, cinsiyet, ülke, takım, pozisyon, yaş, boy, kilo ve 0–100 Potansiyel puanı bir arada sunulur.',
         },
         radar: {
-          title: 'Önemli radar grafikleri',
+          title: 'İstatistik görselleştirmeleri',
           text: 'Kalecilik, Şut, Pas, Savunma, Katkı & Etki ve Hata & Disiplin grafikleri, her oyuncunun son bir yılki performansına göre oluşturulur.',
         },
         reports: {
-          title: 'Profesyonel scouting raporları',
-          text: 'Pro abonelik farkı ile takip ettiğiniz oyuncular için detaylı scouting raporları üretin.',
+          title: 'Profesyonel oyuncu keşfi raporları',
+          text: 'Takip ettiğiniz oyuncular için detaylı oyuncu keşfi raporları üretilir.',
         },
       },
       cta: 'ScoutWise.ai’ı keşfet',
