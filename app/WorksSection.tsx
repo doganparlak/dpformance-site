@@ -60,7 +60,7 @@ export default function WorksSection({ lang }: { lang: Lang }) {
         {
           title: t.works.items.academic.shapeGraphs.title,
           longText: [t.works.items.academic.shapeGraphs.p1],
-          link: { href: 'https://lnkd.in/drwewjHB', label: t.works.readMore },
+          link: { href: 'https://www.nature.com/articles/s44260-025-00047-x', label: t.works.readMore },
           folder: 'SHAPE_GRAPHS_IMAGES',
         },
         {
