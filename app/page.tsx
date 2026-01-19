@@ -142,8 +142,8 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen bg-gray-950 text-white px-6 flex flex-col items-center text-center">
-        {/* Header Navigation */}
-          <header className="w-full max-w-6xl py-4 flex items-center justify-between sticky top-0 z-50 bg-gray-950 bg-opacity-90 border-b border-gray-800 shadow-md backdrop-blur-sm">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-gray-950 border-b border-gray-800 shadow-md">
+          <div className="w-full max-w-6xl mx-auto px-6 py-4 flex items-center justify-between backdrop-blur-sm bg-gray-950">
             {/* Left spacer (desktop only) */}
             <div className="hidden md:block w-24" />
 
@@ -151,35 +151,35 @@ export default function Home() {
             <nav className="hidden md:flex gap-8 text-sm sm:text-base font-semibold">
               <a
                 href="#about-us"
-                onClick={scrollToId('about-us')}
+                onClick={scrollToId("about-us")}
                 className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
               >
                 {t.nav.about}
               </a>
               <a
                 href="#founder"
-                onClick={scrollToId('founder')}
+                onClick={scrollToId("founder")}
                 className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
               >
                 {t.nav.founder}
               </a>
               <a
                 href="#consultancy"
-                onClick={scrollToId('consultancy')}
+                onClick={scrollToId("consultancy")}
                 className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
               >
                 {t.nav.consultancy}
               </a>
               <a
                 href="#selected-works"
-                onClick={scrollToId('selected-works')}
+                onClick={scrollToId("selected-works")}
                 className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
               >
                 {t.nav.works}
               </a>
               <a
                 href="#scoutwise"
-                onClick={scrollToId('scoutwise')}
+                onClick={scrollToId("scoutwise")}
                 className="group pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red"
               >
                 <span className="group-hover:text-primary-red text-white">Scout</span>
@@ -187,7 +187,7 @@ export default function Home() {
               </a>
               <a
                 href="#contact"
-                onClick={scrollToId('contact')}
+                onClick={scrollToId("contact")}
                 className="pb-1 cursor-pointer transition-colors border-b-2 border-transparent hover:border-primary-red hover:text-primary-red"
               >
                 {t.nav.contact}
@@ -199,16 +199,18 @@ export default function Home() {
               <button
                 type="button"
                 aria-label={t.langToggle.aria}
-                onClick={() => switchLang(lang === 'en' ? 'tr' : 'en')}
+                onClick={() => switchLang(lang === "en" ? "tr" : "en")}
                 className="inline-flex items-center gap-2 rounded-full border border-gray-800 bg-gray-900/60 px-3 py-1.5 text-xs font-semibold text-gray-200 hover:bg-gray-900 hover:text-white transition-colors"
               >
-                <span className={lang === 'tr' ? 'text-primary-red' : ''}>{t.langToggle.tr}</span>
+                <span className={lang === "tr" ? "text-primary-red" : ""}>{t.langToggle.tr}</span>
                 <span className="text-gray-500">/</span>
-                <span className={lang === 'en' ? 'text-primary-red' : ''}>{t.langToggle.en}</span>
+                <span className={lang === "en" ? "text-primary-red" : ""}>{t.langToggle.en}</span>
               </button>
             </div>
-          </header>
+          </div>
+        </header>
 
+        <div aria-hidden className="h-[var(--header-h,64px)]" />
 
         {/* About Us Section */}
         <section id="about-us" className="flex flex-col items-center justify-center mt-10 px-4">
