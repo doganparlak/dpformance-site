@@ -115,7 +115,7 @@ export const I18N = {
         message: 'Message',
         namePh: 'Your full name',
         emailPh: 'E-mail',
-        phonePh: 'Phone Number',
+        phonePh: 'Phone number',
         msgPh: 'Your message here...',
         send: 'Send Message',
         sending: 'Sending...',
