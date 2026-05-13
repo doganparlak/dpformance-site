@@ -67,11 +67,11 @@ export const I18N = {
       },
     },
     scoutwise: {
-      badge: 'New • AI Powered Scouting & Recruitment Intelligence',
-      title: 'Your intelligent football scouting companion',
+      badge: 'New • AI-Powered Scouting & Recruitment Intelligence',
+      title: 'Your Intelligent Football Scouting Companion',
       desc: {
         beforeLeagues:
-          'ScoutWise is an AI-powered scouting assistant that turns your ideas, filters and data into clear, football-first insights — spanning',
+          'ScoutWise turns football data into an end-to-end scouting workflow across',
         leaguesHighlight: '113 leagues worldwide',
         afterLeagues:
           ' and ',
@@ -80,27 +80,35 @@ export const I18N = {
           ', powered by ',
         statsHighlight: '75+ stats',
         afterStats:
-          '. You can define your',
+          '. Use the core product to follow Weekly Top Searches, filter the Player Pool, review player cards with potential and form computations, and compare profiles in the Matchup Center; with ScoutWise Pro, define your',
         strategyHighlight: 'team strategy & scouting philosophy',
         afterStrategy:
-          ', then chat to explore, compare and shortlist players who genuinely fit your game model.',
+          ' so chat, metric interpretations, portfolio tracking and scouting reports are shaped around players who genuinely fit your game model.',
       },
       features: {
-        strategy: {
-          title: 'Strategy-aware search',
-          text: 'Start with an optional strategy screen so every suggestion aligns with your tactical approach.',
+        weekly: {
+          title: 'Weekly Top Searches',
+          text: 'Highlights the 10 players receiving the most user attention that week, giving you a quick read on current scouting momentum.',
         },
-        cards: {
-          title: 'Player cards',
-          text: 'Name, gender, nationality, team, age, height, weight and 0–100 Potential score in one place.',
+        pool: {
+          title: 'Player Pool',
+          text: 'Filter by identity, team, league, role, age and physical profile, then review player cards with computed Potential and Form scores.',
         },
-        radar: {
-          title: 'Metric visualizations that matter',
-          text: 'Goalkeeping, Shooting, Passing, Defending, Contribution & Impact, and Errors & Discipline plots for each player.',
+        matchup: {
+          title: 'Matchup Center',
+          text: 'Compare two selected players side by side through shared metrics, structured tables, charts and focused visual views.',
+        },
+        pro: {
+          title: 'Strategy / Scouting Philosophy',
+          text: 'A ScoutWise Pro capability: define your strategy and scouting philosophy so profiles are interpreted through the lens of your game model.',
+        },
+        chat: {
+          title: 'Pro Chat',
+          text: 'A ScoutWise Pro capability: ask by player name or desired profile and get player cards, metric visuals and context-aware interpretations.',
         },
         reports: {
-          title: 'Professional scouting reports',
-          text: 'Generate in-depth reports and portfolio overviews for your tracked players.',
+          title: 'Professional Scouting Reports',
+          text: 'Track players in a portfolio and generate in-depth reports with role analysis, strengths, concerns and fit against your team model.',
         },
       },
       cta: 'Explore ScoutWise.ai',
@@ -272,34 +280,42 @@ export const I18N = {
       title: 'Akıllı Oyuncu Keşfi Mentörün',
       desc: {
         beforeLeagues:
-          'ScoutWise; fikirlerinizi ve tercihlerinizi futbol odaklı, net değerlendirmelere dönüştüren veri tabanlı, yapay zekâ destekli bir oyuncu keşfi asistanıdır. Dünya genelinde ',
-        leaguesHighlight: '113+ lig',
+          'ScoutWise; futbol verisini uçtan uca bir oyuncu keşfi akışına dönüştüren yapay zekâ destekli bir platformdur. Dünya genelinde ',
+        leaguesHighlight: '113 lig',
         afterLeagues: ' ve ',
-        playersHighlight: '55.000+ oyuncuyu',
+        playersHighlight: '52.000+ oyuncuyu',
         afterPlayers: ' kapsar — ',
         statsHighlight: '75+ istatistik',
         afterStats:
-          ' ile karar süreçlerinizi destekler.',
-        strategyHighlight: 'Takım stratejinizi ve scouting felsefeniz',
+          ' ile karar süreçlerinizi destekler. Temel üründe Haftanın En Çok Arananları ile güncel ilgiyi takip edebilir, Oyuncu Havuzu’nu filtreleyebilir, Potansiyel ve Form hesaplamaları içeren oyuncu kartlarını inceleyebilir ve Eşleşme Merkezi’nde profilleri yan yana karşılaştırabilirsiniz; ScoutWise Pro ile ',
+        strategyHighlight: 'takım stratejinizi ve oyuncu keşfi felsefenizi',
         afterStrategy:
-          ' esas alınarak; ScoutWise ile sohbet ederken oyun modelinize uyan oyuncuları keşfetmenize, karşılaştırmanıza ve portföyünüzü oluşturmanıza yardımcı olur.',
+          ' tanımlayarak sohbet, metrik yorumları, portföy takibi ve oyuncu keşfi raporlarını oyun modelinize gerçekten uyan profiller etrafında şekillendirebilirsiniz.',
       },
       features: {
-        strategy: {
-          title: 'Strateji uyumlu arama',
-          text: 'İsteğe bağlı strateji ekranı ile ScoutWise tüm önerilerini taktik yaklaşımınıza uygun yapar.',
+        weekly: {
+          title: 'Haftanın En Çok Arananları',
+          text: 'O hafta kullanıcıların en çok ilgi gösterdiği 10 oyuncuyu öne çıkararak güncel scouting ilgisini hızlıca gösterir.',
         },
-        cards: {
-          title: 'Oyuncu kartları',
-          text: 'İsim, cinsiyet, ülke, takım, pozisyon, yaş, boy, kilo ve 0–100 Potansiyel puanı bir arada sunulur.',
+        pool: {
+          title: 'Oyuncu Havuzu',
+          text: 'Oyuncuları kimlik, takım, lig, rol, yaş ve fiziksel profile göre filtreleyin; hesaplanan Potansiyel ve Form puanlarıyla inceleyin.',
         },
-        radar: {
-          title: 'İstatistik görselleştirmeleri',
-          text: 'Kalecilik, Şut, Pas, Savunma, Katkı & Etki ve Hata & Disiplin grafikleri, her oyuncunun son bir yılki performansına göre oluşturulur.',
+        matchup: {
+          title: 'Eşleşme Merkezi',
+          text: 'İki seçili oyuncuyu ortak metrikler, tablolar, grafikler ve odaklı görsel alanlarla yan yana karşılaştırın.',
+        },
+        pro: {
+          title: 'Strateji / Oyuncu Keşfi Felsefesi',
+          text: 'Bir ScoutWise Pro özelliği: stratejinizi ve oyuncu keşfi felsefenizi tanımlayın; profiller oyun modelinizin bakış açısıyla yorumlansın.',
+        },
+        chat: {
+          title: 'Pro Sohbet',
+          text: 'Bir ScoutWise Pro özelliği: oyuncu ismiyle ya da aradığınız profille sorun; oyuncu kartları, metrik görselleri ve bağlama duyarlı yorumlar alın.',
         },
         reports: {
-          title: 'Profesyonel oyuncu keşfi raporları',
-          text: 'Takip ettiğiniz oyuncular için detaylı oyuncu keşfi raporları üretilir.',
+          title: 'Profesyonel Oyuncu Keşfi Raporları',
+          text: 'İzlediğiniz oyuncuları portföyünüzde takip edin; rol analizi, güçlü yönler, endişeler ve takım modelinize uyumu içeren detaylı raporlar üretin.',
         },
       },
       cta: 'ScoutWise.ai’ı keşfet',
